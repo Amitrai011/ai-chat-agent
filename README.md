@@ -92,3 +92,21 @@ HTTP route/controller → ChatService → repository (Drizzle/PostgreSQL)
 The OpenAI call uses the Responses API. A system instruction contains the Acme & Co. policies and tells the model not to invent policies, order access, discounts, or guarantees. Up to the latest 20 persisted messages are mapped to `user`/`assistant` input so follow-up questions remain contextual.
 
 The model, output ceiling, history limit, and timeout are configurable. The default model favors latency and cost for concise FAQ support, while the service abstraction keeps provider replacement straightforward. When OpenAI fails, the user message remains persisted but no synthetic AI message is written.
+
+## Trade-offs & “If I had more time…”
+
+- The AI reply comes back all at once instead of word-by-word like ChatGPT. This made the app simpler to build, but streaming replies would make it feel faster and more polished.
+
+- I did not add login or user accounts because the assignment does not require them. In a real app, I’d make sure users can only access their own conversations.
+
+- The database is kept simple with only conversations and messages. Later, I’d add message status, chat source, customer details, and priority.
+
+- I did not add file attachments in this version. With more time, I’d let users attach screenshots, invoices, or order-related files so the AI or support team has more context.
+
+- I did not add support ticket creation yet. In a real product, the AI could create a ticket when it cannot solve the issue, mark its priority, and track its status.
+
+- I did not add human handoff yet. With more time, the AI could assign the conversation or ticket to a real support agent when the customer needs personal help.
+
+- I skipped extra production features like Redis, rate limits, moderation, and advanced logging to keep the project focused. In a real launch, these would help with speed, safety, and monitoring.
+
+- If I had more time, I’d add live streaming replies, an editable FAQ dashboard, attachments, ticket management, human agent assignment, analytics, and fallback support if one AI provider is down.
